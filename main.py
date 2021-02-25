@@ -9,7 +9,7 @@ import os
 
 app = Flask(__name__)
 
-bot = telepot.Bot("Your token bot")
+bot = telepot.Bot("1468139592:AAFoNdHFTpOWWeYQAyT4yAWbQ3Y6mPb-j_0")
 
 MESSAGES_NOW = []
 AFTER_DOWNLOAD = []
@@ -42,6 +42,7 @@ class Downloader:
             bot.sendMessage(uid, stts.get("msg"), parse_mode="Markdown")
 
     def inline_markup(self, new_msg):
+        "Handling message Markup"
         uid = new_msg["message"]["chat"]["id"]
         id = eval(new_msg["data"])["id"]
         tipe = eval(new_msg["data"])["tipe"]

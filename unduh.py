@@ -40,7 +40,7 @@ class Main:
             _edit = eyed3.load(filename)
             _edit.tag.title = title
             _edit.tag.artist = res["singerName"]
-            _edit.tag.album = "Ismi Downloader"
+            _edit.tag.album = "Xiuz Downloader"
             _edit.tag.images.set(
                 3, open(title + ".jpg", "rb").read(), "image/jpeg")
             _edit.tag.save()
@@ -90,7 +90,7 @@ class Main:
                     audio = eyed3.load(filename)
                     audio.tag.title = url.get("judul").replace(".mp3", "")
                     audio.tag.artist = "Ismrwtbot"
-                    audio.tag.album = "Ismi Downloader"
+                    audio.tag.album = "Xiuz Downloader"
                     audio.tag.images.set(
                         3,
                         open(thumb, "rb").read(),
