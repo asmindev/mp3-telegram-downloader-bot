@@ -5,7 +5,7 @@ import eyed3
 class Main:
     def __init__(self):
         self.__url = "https://www.downloadlagu321.net"
-        self.__joox = "https://afara.my.id/api/joox/"
+        self.__joox = "https://public-restapi.herokuapp.com/api/joox/"
 
     def joox_search(self, query):
         songs = []
