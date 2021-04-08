@@ -56,22 +56,25 @@ class Main:
         array = []
         data = requests.get(
             self.__url + "/api/search/%s" % query.replace(" ", "%20"), verify=False
-        ).json()
-        if len(data) != 0:
-            for item in data:
-                judul = item.get("title")
-                id = item.get("id")
-                array.append(dict(judul=judul, id=id))
-            return dict(status=True, songs=array)
-        else:
+        )
+        try:
+            data = data.json()
+            if len(data) != 0:
+                for item in data:
+                    judul = item.get("title")
+                    id = item.get("id")
+                    array.append(dict(judul=judul, id=id))
+                return dict(status=True, songs=array)
+            else:
+                return dict(status=False, songs=array)
+        except Exception:
             return dict(status=False, songs=array)
 
     def get_source(self, raw_link, filename, ytlink=False):
         # url = "https://michaelbelgium.me/ytconverter/convert.php?youtubelink=https://www.youtube.com/watch?v="
         if ytlink:
-            new = (
-                "https://nuubi.herokuapp.com/api/y2mate/download/mp3?url=%s&quality=128"
-            )
+            new = "https://nuubi.herokuapp.com/api/y2mate/download/mp3?url=%s&quality=128"
+
         else:
             new = "https://nuubi.herokuapp.com/api/y2mate/download/mp3?url=https://www.youtube.com/watch?v=%s&quality=128"
         url = requests.get(new % raw_link).json()
@@ -112,4 +115,5 @@ class Main:
 
 
 # c = Main()
+# c.youtube_search('https://youtu.be/Id6jNuZFX7k')
 # c.get_source("6oi5_UyUnds", "asu.mp3")
