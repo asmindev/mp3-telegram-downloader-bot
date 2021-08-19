@@ -18,10 +18,11 @@ class Youtube:
             thumbnail = to_bs4.find(
                 "img", {"class": "img-thumbnail"}).get("src")
             return dict(
-                link=link.get("href"),
+                url=link.get("href"),
                 thumbnail=thumbnail,
-                title=data.get("Name"),
+                judul=data.get("Name"),
                 size=data.get("Size"),
+                message="sucess get file",
             )
         else:
-            return {}
+            return dict(message="failed get file")
