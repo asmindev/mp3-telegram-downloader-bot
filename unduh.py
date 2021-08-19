@@ -3,11 +3,20 @@ import eyed3
 
 
 class Main:
+    """Main."""
+
     def __init__(self):
+        """__init__."""
         self.__url = "https://www.downloadlagu321.net"
         self.__joox = "https://public-restapi.herokuapp.com/api/joox/"
 
-    def joox_search(self, query):
+    def joox_search(self, query: str) -> dict:
+        """joox_search.
+
+        :param query:
+        :type query: str
+        :rtype: dict
+        """
         songs = []
         params = {"q": query}
         list_song = (
@@ -24,6 +33,11 @@ class Main:
             return dict(status=False, songs=songs)
 
     def joox_get_source(self, uid, filename):
+        """joox_get_source.
+
+        :param uid:
+        :param filename:
+        """
         params = {"id": uid}
         res = requests.get(self.__joox + "show/", params=params).json()[0]
         mp3_link = res["downloadLinks"]["mp3"]
@@ -52,13 +66,19 @@ class Main:
                 msg="Ukuran *%s* Kebesaran. Minimal 7 Mb" % title,
             )
 
-    def youtube_search(self, query):
+    def youtube_search(self, query: str) -> dict:
+        """youtube_search.
+
+        :param query:
+        :type query: str
+        :rtype: dict
+        """
         array = []
-        data = requests.get(
+        resp = requests.get(
             self.__url + "/api/search/%s" % query.replace(" ", "%20"), verify=False
         )
         try:
-            data = data.json()
+            data = resp.json()
             if len(data) != 0:
                 for item in data:
                     judul = item.get("title")
@@ -70,13 +90,22 @@ class Main:
         except Exception:
             return dict(status=False, songs=array)
 
-    def get_source(self, raw_link, filename, ytlink=False):
+    def get_source(self, raw_link: str, filename: str, ytlink: bool = False):
+        """get_source.
+
+        :param raw_link:
+        :type raw_link: str
+        :param filename:
+        :type filename: str
+        :param ytlink:
+        :type ytlink: bool
+        """
         # url = "https://michaelbelgium.me/ytconverter/convert.php?youtubelink=https://www.youtube.com/watch?v="
         if ytlink:
-            new = "https://nuubi.herokuapp.com/api/y2mate/download/mp3?url=%s&quality=128"
+            new = "https://mp3-downloader-bot.herokuapp.com/api/youtube?link=%s"
 
         else:
-            new = "https://nuubi.herokuapp.com/api/y2mate/download/mp3?url=https://www.youtube.com/watch?v=%s&quality=128"
+            new = "https://mp3-downloader-bot.herokuapp.com/api/youtube?link=https://www.youtube.com/watch?v=%s"
         url = requests.get(new % raw_link).json()
 
         if url.get("url"):
@@ -115,5 +144,5 @@ class Main:
 
 
 # c = Main()
-# c.youtube_search('https://youtu.be/Id6jNuZFX7k')
-# c.get_source("6oi5_UyUnds", "asu.mp3")
+# print(c.youtube_search("https://youtu.be/Id6jNuZFX7k"))
+# print(c.get_source("6oi5_UyUnds", "asu.mp3"))
