@@ -22,7 +22,7 @@ class Youtube:
                 thumbnail=thumbnail,
                 judul=data.get("Name"),
                 size=data.get("Size"),
-                message="sucess get file",
+                msg="sucess get file",
             )
         else:
-            return dict(message="failed get file")
+            return dict(msg="failed get file")
