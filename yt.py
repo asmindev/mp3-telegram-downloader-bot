@@ -21,7 +21,10 @@ class Youtube:
                 "img", {"class": "img-thumbnail"}).get("src")
             return dict(
                 url=link.get("href"),
-                thumbnail=thumbnail,
+                thumbnail=thumbnail.replace(
+                    "hqdefault",
+                    "maxresdefault",
+                ),
                 judul=data.get("Name"),
                 size=data.get("Size"),
                 msg="sucess get file",
