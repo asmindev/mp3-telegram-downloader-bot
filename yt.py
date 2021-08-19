@@ -9,7 +9,9 @@ class Youtube:
 
     def metadata(self, link: Text):
         response = requests.get(self.link + link)
-        if response.status_code == 200 and response.json()["Log"]:
+        if response.status_code == 200 and response.json()["Message"].startswith(
+            "http"
+        ):
             data = response.json()
             print(data)
             text = requests.get(data["Message"]).text

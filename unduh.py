@@ -141,7 +141,7 @@ class Main:
                             "judul"),
                     )
         else:
-            return dict(success=False, judul=None, msg=url.get("error"))
+            return dict(success=False, judul=None, msg=url.get("msg"))
 
 
 # c = Main()
