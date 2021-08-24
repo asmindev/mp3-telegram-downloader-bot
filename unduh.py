@@ -115,7 +115,7 @@ class Main:
             if size:
                 if 7200000 >= int(size):
                     with open(filename, "wb") as f:
-                        response = requests.get(url.get("url"))
+                        response = requests.get(url.get("url"), verify=False)
                         f.write(response.content)
                     with open(thumb, "wb") as f:
                         f.write(
