@@ -13,8 +13,7 @@ class Youtube:
             "http"
         ):
             data = response.json()
-            print(data)
-            text = requests.get(data["Message"]).text
+            text = requests.get(data["Message"], verify=False).text
             to_bs4 = BeautifulSoup(text, "html.parser")
             link = to_bs4.find("a", {"class": "btn-success"})
             thumbnail = to_bs4.find(
