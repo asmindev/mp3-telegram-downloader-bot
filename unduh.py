@@ -109,7 +109,7 @@ class Main:
         url = requests.get(new % raw_link).json()
 
         if url.get("url"):
-            get_size = requests.get(url.get("url"), stream=True)
+            get_size = requests.get(url.get("url"), verify=False, stream=True)
             size = get_size.headers.get("Content-Length")
             thumb = filename.split(".")[0] + ".jpg"
             if size:
@@ -118,7 +118,10 @@ class Main:
                         response = requests.get(url.get("url"))
                         f.write(response.content)
                     with open(thumb, "wb") as f:
-                        f.write(requests.get(url.get("thumbnail")).content)
+                        f.write(
+                            requests.get(url.get("thumbnail"),
+                                         verify=False).content
+                        )
                     audio = eyed3.load(filename)
                     audio.tag.title = url.get("judul").replace(".mp3", "")
                     audio.tag.artist = "Xiuz"
