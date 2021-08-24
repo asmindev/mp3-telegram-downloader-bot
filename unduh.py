@@ -107,7 +107,6 @@ class Main:
         else:
             new = "https://mp3-downloader-bot.herokuapp.com/api/youtube?link=https://www.youtube.com/watch?v=%s"
         url = requests.get(new % raw_link).json()
-        print(url)
 
         if url.get("url"):
             get_size = requests.get(url.get("url"), stream=True)

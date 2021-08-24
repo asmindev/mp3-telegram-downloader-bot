@@ -8,7 +8,7 @@ class Youtube:
         self.link = "https://x2convert.com/ajax2/getFile.ashx?linkinfo="
 
     def metadata(self, link: Text):
-        response = requests.get(self.link + link)
+        response = requests.get(self.link + link, verify=False)
         if response.status_code == 200 and response.json()["Message"].startswith(
             "http"
         ):
