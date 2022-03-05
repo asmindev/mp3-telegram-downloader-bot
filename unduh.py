@@ -132,9 +132,7 @@ class Main:
                         "image/jpeg",
                     )
                     audio.tag.save()
-                    return dict(
-                        success=True, judul=url.get("judul"), msg="sukses bro!!"
-                    )
+                    return dict(uccess=True, judul=url.get("judul"), msg="sukses bro!!")
                 else:
                     return dict(
                         success=False,
